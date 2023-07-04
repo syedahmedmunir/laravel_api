@@ -11,7 +11,7 @@ use DB;
 class ArticleController extends BaseController
 {
 
-    public function list($id=null){
+    public function index($id=null){
 
         $articles = Article::orderBy('id');
 
@@ -66,6 +66,16 @@ class ArticleController extends BaseController
     }
 
     public function update(Request $request,$id){
+
+      $validator = Validator::make($request->all(), [
+            'title'             => 'max:30',
+            'published_at'      => 'date_format:Y-m-d',
+      ]);
+
+      if ($validator->fails()) {
+         $errors = $validator->errors()->toArray();
+         return  $this->sendErrorResponse($errors,400);
+      }
 
         $article = Article::find($id);
         if (!$article) {

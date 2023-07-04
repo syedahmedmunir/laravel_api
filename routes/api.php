@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/document/store',[UserDocumentController::class,'store']);
 Route::get('/document/download',[UserDocumentController::class,'download']);
 
-Route::get('/articles/{id?}',[ArticleController::class,'list']);
+Route::get('/articles/{id?}',[ArticleController::class,'index']);
 Route::post('/articles',[ArticleController::class,'store']);
 Route::put('/articles/{id}',[ArticleController::class,'update']);
 Route::delete('/articles/{id}',[ArticleController::class,'delete']);
